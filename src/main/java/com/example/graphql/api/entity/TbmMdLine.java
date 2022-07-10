@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
@@ -37,7 +38,7 @@ public class TbmMdLine {
     @Column(name = "proc_type_code")
     private String procTypeCode;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumns({@JoinColumn(name = "fct_code"), @JoinColumn(name = "line_code")})
     private List<TbmMdEquipId> equip;
 }
