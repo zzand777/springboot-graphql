@@ -1,0 +1,11 @@
+type Equip {
+    plant_code:String!
+    equip_id:String!
+    equip_nm:String
+}
+
+input EquipInput {
+    plant_code:String!
+    equip_id:String!
+    equip_nm:String
+}
