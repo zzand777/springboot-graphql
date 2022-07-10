@@ -40,18 +40,18 @@ public class GraphqlController {
     }
 
     @MutationMapping
-    public Iterable<TbmMdEquipId> saveAllEquip(@Argument List<TbmMdEquipId> equip) {
+    public List<TbmMdEquipId> saveAllEquip(@Argument List<TbmMdEquipId> equip) {
         return tbmMdEquipIdRepository.saveAll(equip);
     }
 
 
     @QueryMapping
-    public Iterable<TbmMdLine> findAllLine() {
+    public List<TbmMdLine> findAllLine() {
         return tbmMdLineRepository.findAll();
     }
 
     @MutationMapping
-    public Iterable<TbmMdLine> saveAllLine(@Argument List<TbmMdLine> line) {
+    public List<TbmMdLine> saveAllLine(@Argument List<TbmMdLine> line) {
         return tbmMdLineRepository.saveAll(line);
     }
 }
