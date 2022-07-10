@@ -14,5 +14,5 @@ import lombok.Setter;
 @Getter
 @Setter
 public class TbmMdEquipIdPK implements Serializable {
-    private String fct_code, plant_code, equip_id;
+    private String fctCode, plantCode, equipId;
 }

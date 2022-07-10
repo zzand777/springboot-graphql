@@ -12,5 +12,5 @@ import lombok.Setter;
 @Getter
 @Setter
 public class TbmMdLinePK implements Serializable {
-    private String fct_code, line_code;
+    private String fctCode, lineCode;
 }

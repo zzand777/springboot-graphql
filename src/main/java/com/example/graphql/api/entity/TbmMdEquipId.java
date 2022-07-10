@@ -1,5 +1,6 @@
 package com.example.graphql.api.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
@@ -15,7 +16,20 @@ import lombok.Setter;
 @IdClass(TbmMdEquipIdPK.class)
 public class TbmMdEquipId {
     @Id
-    private String fct_code, plant_code, equip_id;
+    @Column(name = "fct_code")
+    private String fctCode;
     
-    private String equip_nm;
+    @Id
+    @Column(name = "plant_code")
+    private String plantCode;
+    
+    @Id
+    @Column(name = "equip_id")
+    private String equipId;
+    
+    @Column(name = "equip_nm")
+    private String equipNm;
+    
+    @Column(name = "line_code")
+    private String lineCode;
 }
