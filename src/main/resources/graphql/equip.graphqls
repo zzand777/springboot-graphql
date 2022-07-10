@@ -1,16 +1,16 @@
 type Equip {
-    fctCode:String!
-    plantCode:String!
-    equipId:String!
+    fctCode:ID!
+    plantCode:ID!
+    equipId:ID!
     equipNm:String
     lineCode:String
     procTypeCode:String
 }
 
 input EquipInput {
-    fctCode:String!
-    plantCode:String!
-    equipId:String!
+    fctCode:ID!
+    plantCode:ID!
+    equipId:ID!
     equipNm:String
     lineCode:String
     procTypeCode:String

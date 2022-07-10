@@ -1,14 +1,14 @@
 type Line {
-    fctCode:String!
-    lineCode:String!
+    fctCode:ID!
+    lineCode:ID!
     lineNm:String
     procTypeCode:String
     equip:[Equip]
 }
 
 input LineInput {
-    fctCode:String!
-    lineCode:String!
+    fctCode:ID!
+    lineCode:ID!
     lineNm:String
     procTypeCode:String
 }
