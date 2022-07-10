@@ -1,9 +1,11 @@
 type Query {
     findAllEquip:[Equip]
     findByIdEquip(equip:EquipInput):Equip
+    findAllLine:[Line]
 }
 
 type Mutation {
     saveEquip(equip:EquipInput):Equip
     saveAllEquip(equip:[EquipInput]):[Equip]
+    saveAllLine(line:[LineInput]):[Line]
 }
