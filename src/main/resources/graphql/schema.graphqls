@@ -1,0 +1,9 @@
+type Query {
+    findAllEquip:[Equip]
+    findByIdEquip(equip:EquipInput):Equip
+}
+
+type Mutation {
+    saveEquip(equip:EquipInput):Equip
+    saveAllEquip(equip:[EquipInput]):[Equip]
+}
