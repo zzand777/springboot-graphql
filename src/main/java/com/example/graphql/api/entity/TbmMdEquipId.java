@@ -6,6 +6,8 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,6 +15,7 @@ import lombok.Setter;
 @Table(name = "tbm_md_equip_id")
 @Getter
 @Setter
+@DynamicUpdate
 @IdClass(TbmMdEquipIdPK.class)
 public class TbmMdEquipId {
     @Id
@@ -30,6 +33,9 @@ public class TbmMdEquipId {
     @Column(name = "equip_nm")
     private String equipNm;
     
+    @Column(name = "proc_type_code")
+    private String procTypeCode;
+
     @Column(name = "line_code")
     private String lineCode;
 }

@@ -4,6 +4,7 @@ type Equip {
     equipId:String!
     equipNm:String
     lineCode:String
+    procTypeCode:String
 }
 
 input EquipInput {
@@ -12,4 +13,5 @@ input EquipInput {
     equipId:String!
     equipNm:String
     lineCode:String
+    procTypeCode:String
 }
