@@ -1,6 +1,6 @@
 type Query {
     findAllEquip:[Equip]
-    findByIdEquip(equip:EquipInput):Equip
+    getReferenceById(equip:EquipInput):Equip
     findAllLine:[Line]
 }
 

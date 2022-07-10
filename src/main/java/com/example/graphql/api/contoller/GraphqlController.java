@@ -1,7 +1,6 @@
 package com.example.graphql.api.contoller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
@@ -25,13 +24,13 @@ public class GraphqlController {
     private TbmMdLineRepository tbmMdLineRepository;
 
     @QueryMapping
-    public Iterable<TbmMdEquipId> findAllEquip() {
+    public List<TbmMdEquipId> findAllEquip() {
         return tbmMdEquipIdRepository.findAll();
     }
 
     @QueryMapping
-    public Optional<TbmMdEquipId> findByIdEquip(@Argument TbmMdEquipIdPK equip) {
-        return tbmMdEquipIdRepository.findById(equip);
+    public TbmMdEquipId getReferenceById(@Argument TbmMdEquipIdPK equip) {
+        return tbmMdEquipIdRepository.getReferenceById(equip);
     }
 
     @MutationMapping
