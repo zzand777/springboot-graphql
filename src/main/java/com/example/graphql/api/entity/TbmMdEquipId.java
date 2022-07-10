@@ -15,10 +15,7 @@ import lombok.Setter;
 @IdClass(TbmMdEquipIdPK.class)
 public class TbmMdEquipId {
     @Id
-    private String plant_code;
-
-    @Id
-    private String equip_id;
+    private String fct_code, plant_code, equip_id;
     
     private String equip_nm;
 }
