@@ -10,14 +10,19 @@ import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
 import com.example.graphql.api.dao.TbmMdEquipIdRepository;
+import com.example.graphql.api.dao.TbmMdLineRepository;
 import com.example.graphql.api.entity.TbmMdEquipId;
 import com.example.graphql.api.entity.TbmMdEquipIdPK;
+import com.example.graphql.api.entity.TbmMdLine;
 
 @Controller
 public class GraphqlController {
 
     @Autowired
     private TbmMdEquipIdRepository tbmMdEquipIdRepository;
+
+    @Autowired
+    private TbmMdLineRepository tbmMdLineRepository;
 
     @QueryMapping
     public Iterable<TbmMdEquipId> findAllEquip() {
@@ -37,5 +42,16 @@ public class GraphqlController {
     @MutationMapping
     public Iterable<TbmMdEquipId> saveAllEquip(@Argument List<TbmMdEquipId> equip) {
         return tbmMdEquipIdRepository.saveAll(equip);
+    }
+
+
+    @QueryMapping
+    public Iterable<TbmMdLine> findAllLine() {
+        return tbmMdLineRepository.findAll();
+    }
+
+    @MutationMapping
+    public Iterable<TbmMdLine> saveAllLine(@Argument List<TbmMdLine> line) {
+        return tbmMdLineRepository.saveAll(line);
     }
 }

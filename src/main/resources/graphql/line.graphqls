@@ -1,0 +1,13 @@
+type Line {
+    fct_code:String!
+    line_code:String!
+    line_nm:String
+    proc_type_code:String
+}
+
+input LineInput {
+    fct_code:String!
+    line_code:String!
+    line_nm:String
+    proc_type_code:String
+}

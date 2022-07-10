@@ -1,10 +1,12 @@
 type Equip {
+    fct_code:String!
     plant_code:String!
     equip_id:String!
     equip_nm:String
 }
 
 input EquipInput {
+    fct_code:String!
     plant_code:String!
     equip_id:String!
     equip_nm:String

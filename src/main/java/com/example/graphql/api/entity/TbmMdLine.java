@@ -9,13 +9,13 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "tbm_md_equip_id")
+@Table(name = "tbm_md_line")
 @Getter
 @Setter
-@IdClass(TbmMdEquipIdPK.class)
-public class TbmMdEquipId {
+@IdClass(TbmMdLinePK.class)
+public class TbmMdLine {
     @Id
-    private String fct_code, plant_code, equip_id;
-    
-    private String equip_nm;
+    private String fct_code, line_code;
+
+    private String line_nm, proc_type_code;
 }

@@ -24,9 +24,9 @@ public class EquipController {
         return tbmMdEquipIdRepository.findAll();
     }
 
-    @GetMapping("/equip/{plant_code}/{equip_id}")
-    public Optional<TbmMdEquipId> findByIdEquip(@PathVariable String plant_code, @PathVariable String equip_id) {
-        return tbmMdEquipIdRepository.findById(new TbmMdEquipIdPK(plant_code, equip_id));
+    @GetMapping("/equip/{fct_code}/{plant_code}/{equip_id}")
+    public Optional<TbmMdEquipId> findByIdEquip(@PathVariable String fct_code, @PathVariable String plant_code, @PathVariable String equip_id) {
+        return tbmMdEquipIdRepository.findById(new TbmMdEquipIdPK(fct_code, plant_code, equip_id));
     }
 
     @PostMapping("/equip")
