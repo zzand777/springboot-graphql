@@ -5,6 +5,7 @@ type Equip {
     equipNm:String
     lineCode:String
     procTypeCode:String
+    line:Line
 }
 
 input EquipInput {
