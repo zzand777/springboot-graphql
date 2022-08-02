@@ -14,6 +14,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicUpdate;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -39,6 +41,7 @@ public class TbmMdLine {
     private String procTypeCode;
 
     @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumns({@JoinColumn(name = "fct_code"), @JoinColumn(name = "line_code")})
+    @JoinColumns({@JoinColumn(name = "fct_code", insertable = false, updatable = false), @JoinColumn(name = "line_code", insertable = false, updatable = false)})
+    @JsonManagedReference
     private List<TbmMdEquipId> equip;
 }
