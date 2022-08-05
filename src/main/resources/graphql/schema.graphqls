@@ -1,11 +1,22 @@
 type Query {
     findAllEquip:[Equip]
-    getReferenceById(equip:EquipInput):Equip
+    findEquipById(equip:EquipInput):Equip
+
     findAllLine:[Line]
+
+    findEquipStateByFctCode(equipState:EquipStateInput):[EquipState]
+    findEquipStateById(equipState:EquipStateInput):EquipState
 }
 
 type Mutation {
     saveEquip(equip:EquipInput):Equip
     saveAllEquip(equip:[EquipInput]):[Equip]
+
     saveAllLine(line:[LineInput]):[Line]
+
+    saveAllEquipState(equipState:[EquipStateInput]):[EquipState]
+}
+
+type Subscription {
+    notifyEquipState:[EquipState]
 }
