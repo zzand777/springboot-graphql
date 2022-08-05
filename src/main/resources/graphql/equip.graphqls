@@ -16,3 +16,22 @@ input EquipInput {
     lineCode:String
     procTypeCode:String
 }
+
+
+type EquipState {
+    fctCode:ID!
+    plantCode:ID!
+    equipId:ID!
+    unitId:ID!
+    state:String
+    eventDt:String
+}
+
+input EquipStateInput {
+    fctCode:String
+    plantCode:String
+    equipId:String
+    unitId:String
+    state:String
+    eventDt:String
+}
