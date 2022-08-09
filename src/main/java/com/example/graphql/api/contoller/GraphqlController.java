@@ -1,7 +1,6 @@
 package com.example.graphql.api.contoller;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.annotation.PostConstruct;
 
@@ -16,9 +15,6 @@ import org.springframework.stereotype.Controller;
 import com.example.graphql.api.dto.TbmMdEquipIdDTO;
 import com.example.graphql.api.dto.TbmMdLineDTO;
 import com.example.graphql.api.dto.TbmRmEptEquipStateDTO;
-import com.example.graphql.api.entity.TbmRmEptEquipState;
-import com.example.graphql.api.entity.TbmRmEptEquipStatePK;
-import com.example.graphql.api.repository.TbmRmEptEquipStateRepository;
 import com.example.graphql.api.service.EquipService;
 import com.example.graphql.api.service.EquipStateService;
 import com.example.graphql.api.service.LineService;
