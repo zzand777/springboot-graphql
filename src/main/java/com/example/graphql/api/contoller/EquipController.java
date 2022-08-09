@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.graphql.api.dao.TbmMdEquipIdRepository;
 import com.example.graphql.api.entity.TbmMdEquipId;
 import com.example.graphql.api.entity.TbmMdEquipIdPK;
+import com.example.graphql.api.repository.TbmMdEquipIdRepository;
 
 @RestController
 public class EquipController {

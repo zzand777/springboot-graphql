@@ -13,14 +13,18 @@ import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SubscriptionMapping;
 import org.springframework.stereotype.Controller;
 
-import com.example.graphql.api.dao.TbmMdEquipIdRepository;
-import com.example.graphql.api.dao.TbmMdLineRepository;
-import com.example.graphql.api.dao.TbmRmEptEquipStateRepository;
+import com.example.graphql.api.dto.TbmMdEquipIdDTO;
+import com.example.graphql.api.dto.TbmMdLineDTO;
 import com.example.graphql.api.entity.TbmMdEquipId;
 import com.example.graphql.api.entity.TbmMdEquipIdPK;
 import com.example.graphql.api.entity.TbmMdLine;
 import com.example.graphql.api.entity.TbmRmEptEquipState;
 import com.example.graphql.api.entity.TbmRmEptEquipStatePK;
+import com.example.graphql.api.repository.TbmMdEquipIdRepository;
+import com.example.graphql.api.repository.TbmMdLineRepository;
+import com.example.graphql.api.repository.TbmRmEptEquipStateRepository;
+import com.example.graphql.api.service.EquipService;
+import com.example.graphql.api.service.LineService;
 
 import reactor.core.publisher.ConnectableFlux;
 import reactor.core.publisher.Flux;
@@ -30,10 +34,11 @@ import reactor.core.publisher.FluxSink;
 public class GraphqlController {
 
     @Autowired
-    private TbmMdEquipIdRepository tbmMdEquipIdRepository;
+    private EquipService equipService;
 
     @Autowired
-    private TbmMdLineRepository tbmMdLineRepository;
+    private LineService lineService;
+    
 
     @Autowired
     private TbmRmEptEquipStateRepository tbmRmEptEquipStateRepository;
@@ -50,37 +55,37 @@ public class GraphqlController {
         equipStatePublisher = publisher.publish();
         equipStatePublisher.connect();
     }
-
+    
 
     @QueryMapping
-    public List<TbmMdEquipId> findAllEquip() {
-        return tbmMdEquipIdRepository.findAll();
+    public List<TbmMdEquipIdDTO> findAllEquip() {
+        return equipService.findAll();
     }
 
     @QueryMapping
-    public Optional<TbmMdEquipId> findEquipById(@Argument TbmMdEquipIdPK equip) {
-        return tbmMdEquipIdRepository.findById(equip);
+    public TbmMdEquipIdDTO findEquipById(@Argument TbmMdEquipIdDTO equip) {
+        return equipService.findById(equip);
     }
 
     @MutationMapping
-    public TbmMdEquipId saveEquip(@Argument TbmMdEquipId equip) {
-        return tbmMdEquipIdRepository.save(equip);
+    public TbmMdEquipIdDTO saveEquip(@Argument TbmMdEquipIdDTO equip) {
+        return equipService.save(equip);
     }
 
     @MutationMapping
-    public List<TbmMdEquipId> saveAllEquip(@Argument List<TbmMdEquipId> equip) {
-        return tbmMdEquipIdRepository.saveAll(equip);
+    public List<TbmMdEquipIdDTO> saveAllEquip(@Argument List<TbmMdEquipIdDTO> equip) {
+        return equipService.saveAll(equip);
     }
-
+    
 
     @QueryMapping
-    public List<TbmMdLine> findAllLine() {
-        return tbmMdLineRepository.findAll();
+    public List<TbmMdLineDTO> findAllLine() {
+        return lineService.findAll();
     }
 
     @MutationMapping
-    public List<TbmMdLine> saveAllLine(@Argument List<TbmMdLine> line) {
-        return tbmMdLineRepository.saveAll(line);
+    public List<TbmMdLineDTO> saveAllLine(@Argument List<TbmMdLineDTO> line) {
+        return lineService.saveAll(line);
     }
 
 
