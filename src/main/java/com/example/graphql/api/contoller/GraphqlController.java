@@ -15,13 +15,8 @@ import org.springframework.stereotype.Controller;
 
 import com.example.graphql.api.dto.TbmMdEquipIdDTO;
 import com.example.graphql.api.dto.TbmMdLineDTO;
-import com.example.graphql.api.entity.TbmMdEquipId;
-import com.example.graphql.api.entity.TbmMdEquipIdPK;
-import com.example.graphql.api.entity.TbmMdLine;
 import com.example.graphql.api.entity.TbmRmEptEquipState;
 import com.example.graphql.api.entity.TbmRmEptEquipStatePK;
-import com.example.graphql.api.repository.TbmMdEquipIdRepository;
-import com.example.graphql.api.repository.TbmMdLineRepository;
 import com.example.graphql.api.repository.TbmRmEptEquipStateRepository;
 import com.example.graphql.api.service.EquipService;
 import com.example.graphql.api.service.LineService;
