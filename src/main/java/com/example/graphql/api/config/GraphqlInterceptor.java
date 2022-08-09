@@ -5,11 +5,10 @@ import org.springframework.graphql.server.WebGraphQlRequest;
 import org.springframework.graphql.server.WebGraphQlResponse;
 import org.springframework.stereotype.Component;
 
-import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
 @Component
-@Slf4j
+// @Slf4j
 public class GraphqlInterceptor implements WebGraphQlInterceptor {
 
     @Override
