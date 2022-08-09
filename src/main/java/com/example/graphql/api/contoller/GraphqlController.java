@@ -1,7 +1,6 @@
 package com.example.graphql.api.contoller;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.annotation.PostConstruct;
 
@@ -13,14 +12,12 @@ import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SubscriptionMapping;
 import org.springframework.stereotype.Controller;
 
-import com.example.graphql.api.dao.TbmMdEquipIdRepository;
-import com.example.graphql.api.dao.TbmMdLineRepository;
-import com.example.graphql.api.dao.TbmRmEptEquipStateRepository;
-import com.example.graphql.api.entity.TbmMdEquipId;
-import com.example.graphql.api.entity.TbmMdEquipIdPK;
-import com.example.graphql.api.entity.TbmMdLine;
-import com.example.graphql.api.entity.TbmRmEptEquipState;
-import com.example.graphql.api.entity.TbmRmEptEquipStatePK;
+import com.example.graphql.api.dto.TbmMdEquipIdDTO;
+import com.example.graphql.api.dto.TbmMdLineDTO;
+import com.example.graphql.api.dto.TbmRmEptEquipStateDTO;
+import com.example.graphql.api.service.EquipService;
+import com.example.graphql.api.service.EquipStateService;
+import com.example.graphql.api.service.LineService;
 
 import reactor.core.publisher.ConnectableFlux;
 import reactor.core.publisher.Flux;
@@ -30,79 +27,81 @@ import reactor.core.publisher.FluxSink;
 public class GraphqlController {
 
     @Autowired
-    private TbmMdEquipIdRepository tbmMdEquipIdRepository;
+    private EquipService equipService;
 
     @Autowired
-    private TbmMdLineRepository tbmMdLineRepository;
-
+    private LineService lineService;
+    
     @Autowired
-    private TbmRmEptEquipStateRepository tbmRmEptEquipStateRepository;
+    private EquipStateService equipStateService;
 
-    private FluxSink<List<TbmRmEptEquipState>> equipStateStream;
-    private ConnectableFlux<List<TbmRmEptEquipState>> equipStatePublisher;
+    
+
+    private FluxSink<List<TbmRmEptEquipStateDTO>> equipStateStream;
+    private ConnectableFlux<List<TbmRmEptEquipStateDTO>> equipStatePublisher;
 
     @PostConstruct
     private void init() {
-        Flux<List<TbmRmEptEquipState>> publisher = Flux.create(emitter -> {
+        Flux<List<TbmRmEptEquipStateDTO>> publisher = Flux.create(emitter -> {
             equipStateStream = emitter;
         });
 
         equipStatePublisher = publisher.publish();
         equipStatePublisher.connect();
     }
-
+    
 
     @QueryMapping
-    public List<TbmMdEquipId> findAllEquip() {
-        return tbmMdEquipIdRepository.findAll();
+    public List<TbmMdEquipIdDTO> findAllEquip() {
+        return equipService.findAll();
     }
 
     @QueryMapping
-    public Optional<TbmMdEquipId> findEquipById(@Argument TbmMdEquipIdPK equip) {
-        return tbmMdEquipIdRepository.findById(equip);
+    public TbmMdEquipIdDTO findEquipById(@Argument TbmMdEquipIdDTO equip) {
+        return equipService.findById(equip);
     }
 
     @MutationMapping
-    public TbmMdEquipId saveEquip(@Argument TbmMdEquipId equip) {
-        return tbmMdEquipIdRepository.save(equip);
+    public TbmMdEquipIdDTO saveEquip(@Argument TbmMdEquipIdDTO equip) {
+        return equipService.save(equip);
     }
 
     @MutationMapping
-    public List<TbmMdEquipId> saveAllEquip(@Argument List<TbmMdEquipId> equip) {
-        return tbmMdEquipIdRepository.saveAll(equip);
+    public List<TbmMdEquipIdDTO> saveAllEquip(@Argument List<TbmMdEquipIdDTO> equip) {
+        return equipService.saveAll(equip);
+    }
+    
+
+    @QueryMapping
+    public List<TbmMdLineDTO> findAllLine() {
+        return lineService.findAll();
+    }
+
+    @MutationMapping
+    public List<TbmMdLineDTO> saveAllLine(@Argument List<TbmMdLineDTO> line) {
+        return lineService.saveAll(line);
     }
 
 
     @QueryMapping
-    public List<TbmMdLine> findAllLine() {
-        return tbmMdLineRepository.findAll();
-    }
-
-    @MutationMapping
-    public List<TbmMdLine> saveAllLine(@Argument List<TbmMdLine> line) {
-        return tbmMdLineRepository.saveAll(line);
-    }
-
-
-    @QueryMapping
-    public Optional<TbmRmEptEquipState> findEquipStateById(@Argument TbmRmEptEquipStatePK equipState) {
-        return tbmRmEptEquipStateRepository.findById(equipState);
+    public TbmRmEptEquipStateDTO findEquipStateById(@Argument TbmRmEptEquipStateDTO equipState) {
+        return equipStateService.findById(equipState);
     }
 
     @QueryMapping
-    public List<TbmRmEptEquipState> findEquipStateByFctCode(@Argument TbmRmEptEquipState equipState) {
-        return tbmRmEptEquipStateRepository.findByFctCode(equipState.getFctCode());
+    public List<TbmRmEptEquipStateDTO> findEquipStateByFctCode(@Argument TbmRmEptEquipStateDTO equipState) {
+        return equipStateService.findByFctCode(equipState);
     }
 
     @MutationMapping
-    public List<TbmRmEptEquipState> saveAllEquipState(@Argument List<TbmRmEptEquipState> equipState) {
-        List<TbmRmEptEquipState> saveEquipStateList = tbmRmEptEquipStateRepository.saveAll(equipState);
+    public List<TbmRmEptEquipStateDTO> saveAllEquipState(@Argument List<TbmRmEptEquipStateDTO> equipState) {
+        List<TbmRmEptEquipStateDTO> saveEquipStateList = equipStateService.saveAll(equipState);
         equipStateStream.next(saveEquipStateList);
         return saveEquipStateList;
     }
 
     @SubscriptionMapping
-    public Publisher<List<TbmRmEptEquipState>> notifyEquipState() {
+    public Publisher<List<TbmRmEptEquipStateDTO>> notifyEquipState() {
         return equipStatePublisher;
     }
 

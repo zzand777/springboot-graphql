@@ -9,19 +9,25 @@ import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
 
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
 @Entity
 @Table(name = "tbm_md_equip_id")
-@Getter
-@Setter
-@DynamicUpdate
 @IdClass(TbmMdEquipIdPK.class)
+@DynamicInsert
+@DynamicUpdate
 public class TbmMdEquipId {
     @Id
     @Column(name = "fct_code")

@@ -1,4 +1,4 @@
-package com.example.graphql.api.dao;
+package com.example.graphql.api.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
