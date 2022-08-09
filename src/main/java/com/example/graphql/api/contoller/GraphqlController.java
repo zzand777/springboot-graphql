@@ -15,10 +15,12 @@ import org.springframework.stereotype.Controller;
 
 import com.example.graphql.api.dto.TbmMdEquipIdDTO;
 import com.example.graphql.api.dto.TbmMdLineDTO;
+import com.example.graphql.api.dto.TbmRmEptEquipStateDTO;
 import com.example.graphql.api.entity.TbmRmEptEquipState;
 import com.example.graphql.api.entity.TbmRmEptEquipStatePK;
 import com.example.graphql.api.repository.TbmRmEptEquipStateRepository;
 import com.example.graphql.api.service.EquipService;
+import com.example.graphql.api.service.EquipStateService;
 import com.example.graphql.api.service.LineService;
 
 import reactor.core.publisher.ConnectableFlux;
@@ -34,16 +36,17 @@ public class GraphqlController {
     @Autowired
     private LineService lineService;
     
-
     @Autowired
-    private TbmRmEptEquipStateRepository tbmRmEptEquipStateRepository;
+    private EquipStateService equipStateService;
 
-    private FluxSink<List<TbmRmEptEquipState>> equipStateStream;
-    private ConnectableFlux<List<TbmRmEptEquipState>> equipStatePublisher;
+    
+
+    private FluxSink<List<TbmRmEptEquipStateDTO>> equipStateStream;
+    private ConnectableFlux<List<TbmRmEptEquipStateDTO>> equipStatePublisher;
 
     @PostConstruct
     private void init() {
-        Flux<List<TbmRmEptEquipState>> publisher = Flux.create(emitter -> {
+        Flux<List<TbmRmEptEquipStateDTO>> publisher = Flux.create(emitter -> {
             equipStateStream = emitter;
         });
 
@@ -85,24 +88,24 @@ public class GraphqlController {
 
 
     @QueryMapping
-    public Optional<TbmRmEptEquipState> findEquipStateById(@Argument TbmRmEptEquipStatePK equipState) {
-        return tbmRmEptEquipStateRepository.findById(equipState);
+    public TbmRmEptEquipStateDTO findEquipStateById(@Argument TbmRmEptEquipStateDTO equipState) {
+        return equipStateService.findById(equipState);
     }
 
     @QueryMapping
-    public List<TbmRmEptEquipState> findEquipStateByFctCode(@Argument TbmRmEptEquipState equipState) {
-        return tbmRmEptEquipStateRepository.findByFctCode(equipState.getFctCode());
+    public List<TbmRmEptEquipStateDTO> findEquipStateByFctCode(@Argument TbmRmEptEquipStateDTO equipState) {
+        return equipStateService.findByFctCode(equipState);
     }
 
     @MutationMapping
-    public List<TbmRmEptEquipState> saveAllEquipState(@Argument List<TbmRmEptEquipState> equipState) {
-        List<TbmRmEptEquipState> saveEquipStateList = tbmRmEptEquipStateRepository.saveAll(equipState);
+    public List<TbmRmEptEquipStateDTO> saveAllEquipState(@Argument List<TbmRmEptEquipStateDTO> equipState) {
+        List<TbmRmEptEquipStateDTO> saveEquipStateList = equipStateService.saveAll(equipState);
         equipStateStream.next(saveEquipStateList);
         return saveEquipStateList;
     }
 
     @SubscriptionMapping
-    public Publisher<List<TbmRmEptEquipState>> notifyEquipState() {
+    public Publisher<List<TbmRmEptEquipStateDTO>> notifyEquipState() {
         return equipStatePublisher;
     }
 
